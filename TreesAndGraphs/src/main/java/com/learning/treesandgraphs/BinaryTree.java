@@ -1,14 +1,17 @@
 package com.learning.treesandgraphs;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class BinaryTree {
 
     private Node root;
 
-    void addValue(int value){
+    void addValue(int value) {
         root = addRecursively(root, value);
     }
 
-    private Node addRecursively(Node root, int value){
+    private Node addRecursively(Node root, int value) {
         if (root == null) {
             return new Node(value);
         } else if (root.nodeValue < value) {
@@ -19,12 +22,12 @@ public class BinaryTree {
         return root;
     }
 
-    public int getSize(){
+    public int getSize() {
         int size = 0;
         return checkSize(size, root);
     }
 
-    private int checkSize(int size, Node node){
+    private int checkSize(int size, Node node) {
         if (node != null) {
             size += 1 +
                     checkSize(size, node.left) +
@@ -33,23 +36,37 @@ public class BinaryTree {
         return size;
     }
 
-    boolean containsValueDeepSearch(int val){
+    boolean containsValueDeepSearch(int val) {
         return deepFirstSearch(val, root);
     }
 
-    boolean containsValueBreadthSearch(int val){
+    boolean containsValueBreadthSearch(int val) {
         return breadthFirstSearch(root, val);
 
     }
 
-    private boolean breadthFirstSearch(Node node, int val){
+    private boolean breadthFirstSearch(Node node, int val) {
         if (node == null) {
             return false;
         }
-        return node.nodeValue == val || breadthFirstSearch(node.left, val) || breadthFirstSearch(node.right, val);
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(node);
+        while (!queue.isEmpty()) {
+            Node removedNode = queue.remove();
+            if (removedNode.nodeValue == val) {
+                return true;
+            }
+            if (removedNode.left != null) {
+                queue.add(removedNode.left);
+            }
+            if (removedNode.right != null) {
+                queue.add(removedNode.right);
+            }
+        }
+        return false;
     }
 
-    private boolean deepFirstSearch(int val, Node node){
+    private boolean deepFirstSearch(int val, Node node) {
         if (node == null) {
             return false;
         } else {
@@ -61,11 +78,11 @@ public class BinaryTree {
         }
     }
 
-    void deleteNode(int value){
+    void deleteNode(int value) {
         root = deleteNodeRecursively(value, root);
     }
 
-    private Node deleteNodeRecursively(int value, Node node){
+    private Node deleteNodeRecursively(int value, Node node) {
         if (value == node.nodeValue) {
             return removeFoundNode(node);
         } else if (value > node.nodeValue && node.left != null) {
@@ -76,7 +93,7 @@ public class BinaryTree {
         return node;
     }
 
-    private Node removeFoundNode(Node node){
+    private Node removeFoundNode(Node node) {
         if (node.left == null && node.right == null) {
             return null;
         } else {
@@ -88,11 +105,11 @@ public class BinaryTree {
         }
     }
 
-    public void printNumbersInOrder(){
+    public void printNumbersInOrder() {
         printNumbersInRightOrder(root);
     }
 
-    private void printNumbersInRightOrder(Node node){
+    private void printNumbersInRightOrder(Node node) {
         if (node != null) {
             printNumbersInRightOrder(node.right);
 
@@ -101,11 +118,11 @@ public class BinaryTree {
         }
     }
 
-    public void printNumbersInPreOrder(){
+    public void printNumbersInPreOrder() {
         printNumbersInPreOrder(root);
     }
 
-    private void printNumbersInPreOrder(Node node){
+    private void printNumbersInPreOrder(Node node) {
         if (node != null) {
             System.out.print(node.nodeValue + " ");
             printNumbersInPreOrder(node.right);
@@ -113,15 +130,15 @@ public class BinaryTree {
         }
     }
 
-    public void printNumbersInPostOrder(){
+    public void printNumbersInPostOrder() {
         printNumbersInPostOrder(root);
     }
 
-    private void printNumbersInPostOrder(Node node){
-        if(node!=null){
+    private void printNumbersInPostOrder(Node node) {
+        if (node != null) {
             printNumbersInPostOrder(node.right);
             printNumbersInPostOrder(node.left);
-            System.out.print(node.nodeValue+" ");
+            System.out.print(node.nodeValue + " ");
         }
     }
 
@@ -130,7 +147,7 @@ public class BinaryTree {
         Node left;
         Node right;
 
-        Node(int value){
+        Node(int value) {
             this.nodeValue = value;
         }
     }

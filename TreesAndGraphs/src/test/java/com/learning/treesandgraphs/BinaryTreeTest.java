@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BinaryTreeTest {
 
     @Test
-    public void shouldReturnTreeSize(){
+    public void shouldReturnTreeSize() {
         //Given
         var expectedSize = 7;
         BinaryTree binaryTree = createBinaryTree();
@@ -23,7 +23,7 @@ public class BinaryTreeTest {
     }
 
     @Test
-    public void shouldReturnTrueWhenCheckingExistingValueUsingDeepSearch(){
+    public void shouldReturnTrueWhenCheckingExistingValueUsingDeepSearch() {
         //Given
         var searchValue = 4;
         BinaryTree binaryTree = createBinaryTree();
@@ -34,7 +34,7 @@ public class BinaryTreeTest {
     }
 
     @Test
-    public void shouldReturnFalseWhenValueNotExistsUsingDeepSearch(){
+    public void shouldReturnFalseWhenValueNotExistsUsingDeepSearch() {
         //Given
         var searchValue = 100;
         BinaryTree binaryTree = createBinaryTree();
@@ -45,7 +45,7 @@ public class BinaryTreeTest {
     }
 
     @Test
-    public void shouldReturnTrueWhenCheckingExistingValueUsingBreadthSearch(){
+    public void shouldReturnTrueWhenCheckingExistingValueUsingBreadthSearch() {
         //Given
         var searchValue = 4;
         BinaryTree binaryTree = createBinaryTree();
@@ -56,7 +56,7 @@ public class BinaryTreeTest {
     }
 
     @Test
-    public void shouldReturnFalseWhenValueNotExistsUsingBreadthSearch(){
+    public void shouldReturnFalseWhenValueNotExistsUsingBreadthSearch() {
         //Given
         var searchValue = 100;
         BinaryTree binaryTree = createBinaryTree();
@@ -67,7 +67,7 @@ public class BinaryTreeTest {
     }
 
     @Test
-    public void shouldReturnTrueWhenDeletingExistingValue(){
+    public void shouldReturnTrueWhenDeletingExistingValue() {
         //Given
         var value = 4;
         BinaryTree binaryTree = createBinaryTree();
@@ -78,7 +78,7 @@ public class BinaryTreeTest {
         assertFalse(binaryTree.containsValueDeepSearch(value));
     }
 
-    private BinaryTree createBinaryTree(){
+    private BinaryTree createBinaryTree() {
         BinaryTree binaryTree = new BinaryTree();
         binaryTree.addValue(6);
         binaryTree.addValue(4);
@@ -97,17 +97,17 @@ public class BinaryTreeTest {
         private final PrintStream originalOut = System.out;
 
         @BeforeEach
-        public void setUp(){
+        public void setUp() {
             System.setOut(new PrintStream(outContent));
         }
 
         @AfterEach
-        public void tearDown(){
+        public void tearDown() {
             System.setOut(originalOut);
         }
 
         @Test
-        public void shouldPrintNumbersInOrder(){
+        public void shouldPrintNumbersInOrder() {
             //Given
             BinaryTree binaryTreeTest = new BinaryTreeTest().createBinaryTree();
             var expectedPrintOrder = "3 4 5 6 7 8 9 ";
@@ -118,9 +118,9 @@ public class BinaryTreeTest {
         }
 
         @Test
-        public void shouldPrintInPreOrder(){
+        public void shouldPrintInPreOrder() {
             //Given
-            var expectedPrintOrder="6 4 3 5 8 7 9 ";
+            var expectedPrintOrder = "6 4 3 5 8 7 9 ";
             BinaryTree binaryTree = new BinaryTreeTest().createBinaryTree();
             //When
             binaryTree.printNumbersInPreOrder();
@@ -129,9 +129,9 @@ public class BinaryTreeTest {
         }
 
         @Test
-        public void shouldPrintInPostOrder(){
+        public void shouldPrintInPostOrder() {
             //Given
-            var expectedPrintOrder="3 5 4 7 9 8 6 ";
+            var expectedPrintOrder = "3 5 4 7 9 8 6 ";
             BinaryTree binaryTree = new BinaryTreeTest().createBinaryTree();
             //When
             binaryTree.printNumbersInPostOrder();
