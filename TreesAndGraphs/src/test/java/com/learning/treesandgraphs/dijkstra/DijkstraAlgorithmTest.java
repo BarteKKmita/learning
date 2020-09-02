@@ -19,9 +19,12 @@ public class DijkstraAlgorithmTest {
     @ParameterizedTest
     @MethodSource("getCities")
     void shouldReturnCorrectDistances(String city, Integer distance) {
+        //Given
         Graph graph = prepareGraph();
+        //When
         DijkstraAlgorithm.calculateShortestPathFromSource(graph, graph.getNodes().get(0));
         List<Node> nodesAfterCalculation = graph.getNodes();
+        //Then
         nodesAfterCalculation.stream()
                 .filter(node -> node.getName().equals(city))
                 .findFirst()
