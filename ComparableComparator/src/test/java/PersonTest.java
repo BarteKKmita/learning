@@ -15,10 +15,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class PersonTest {
 
     @TestFactory
-    Stream<DynamicTest> shouldPeopleBeInNameOrder(){
+    Stream<DynamicTest> shouldPeopleBeInNameOrder() {
+        //Given
         List<Person> peopleList = getPeopleList();
-        peopleList.sort(new PersonByName());
         List<String> expectedOrder = getPeopleInNameOrder();
+        //When
+        peopleList.sort(new PersonByName());
+        //Then
         return peopleList.stream()
                 .map(person -> DynamicTest.dynamicTest("Checking: " + person.getName(), () -> {
                     int id = peopleList.indexOf(person);
@@ -28,17 +31,23 @@ class PersonTest {
 
     @Test
     @DisplayName("Better name comparator")
-    void shouldPeopleBeInNameOrder2(){
+    void shouldPeopleBeInNameOrder2() {
+        //Given
         List<Person> peopleList = getPeopleList();
+        //When
         peopleList.sort(PersonComparator.compareByName());
+        //Then
         peopleList.equals(getPeopleInNameOrder());
     }
 
     @TestFactory
-    Stream<DynamicTest> shouldPeopleBeSortedInAgeOrder(){
+    Stream<DynamicTest> shouldPeopleBeSortedInAgeOrder() {
+        //Given
         List<Person> peopleList = getPeopleList();
-        peopleList.sort(new PersonByAge());
         List<Integer> correctAgeOrder = getPeopleInAgeOrder();
+        //When
+        peopleList.sort(new PersonByAge());
+        //Then
         return peopleList.stream()
                 .map(person -> DynamicTest.dynamicTest("Checking age of " + person.getName(), () -> {
                     int id = peopleList.indexOf(person);
@@ -48,17 +57,20 @@ class PersonTest {
 
     @Test
     @DisplayName("Better age comparator")
-    void shouldPeopleBeSortedInAgeOrder2(){
+    void shouldPeopleBeSortedInAgeOrder2() {
+        //Given
         List<Person> peopleList = getPeopleList();
+        //When
         peopleList.sort(PersonComparator.compareByAge());
+        //Then
         peopleList.equals(getPeopleInAgeOrder());
     }
 
-    private List<Integer> getPeopleInAgeOrder(){
+    private List<Integer> getPeopleInAgeOrder() {
         return Arrays.asList(12, 15, 19, 22);
     }
 
-    List<String> getPeopleInNameOrder(){
+    private List<String> getPeopleInNameOrder() {
         List<String> peopleList = new ArrayList<>();
         peopleList.add("Agness");
         peopleList.add("David");
@@ -67,7 +79,7 @@ class PersonTest {
         return peopleList;
     }
 
-    List<Person> getPeopleList(){
+    private List<Person> getPeopleList() {
         List<Person> peopleList = new ArrayList();
         peopleList.add(new Person("Agness", 15, 170, 3.4));
         peopleList.add(new Person("David", 19, 180, 2.8));
