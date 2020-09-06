@@ -54,7 +54,6 @@ class MaxPairwiseProductTest {
         long start = System.currentTimeMillis();
         maxPairwiseProduct.getMaxPairwiseProduct(maxIntegers);
         long elapsedTimeMillis = System.currentTimeMillis() - start;
-        System.out.println(elapsedTimeMillis);
         //Then
         assertTrue(elapsedTimeMillis < maximumTime);
     }
