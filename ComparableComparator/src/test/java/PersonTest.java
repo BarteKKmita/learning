@@ -1,3 +1,4 @@
+import combinator.People;
 import combinator.Person;
 import combinator.PersonComparator;
 import org.junit.jupiter.api.DisplayName;
@@ -65,6 +66,16 @@ class PersonTest {
         //Then
         peopleList.equals(getPeopleInAgeOrder());
     }
+
+    @Test
+    @DisplayName("Better age comparator")
+    void shouldPeopleBeSortedWhenPersonInjected(People person) {
+        //Given
+        List<Person> peopleList = getPeopleList();
+        //When
+        peopleList.sort(person.getComparator());
+    }
+
 
     private List<Integer> getPeopleInAgeOrder() {
         return Arrays.asList(12, 15, 19, 22);
